@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Extension choice board for We Have the Data – Now What? (All Cape Day 2026): data analysis, small, medium and large shifts, and classical languages.">
+<title>All Cape Day Choice Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: proficiency-ladder header, a sticky row of group chips, then one band per group: activity cards in a grid, resources at the foot of each band. */
+:root{
+  --bg:#f5f6f9; --surface:#ffffff; --sunk:#eceef4; --line:#d6dae5;
+  --ink:#1b2440; --muted:#596181; --accent:#2a5bd7;
+  --g-data:#2a5bd7; --g-small:#b5531f; --g-med:#6c48b8; --g-large:#2a7d6f; --g-lat:#94700a;
+  --g-data-soft:#e3eafb; --g-small-soft:#f8e8de; --g-med-soft:#ece6f8; --g-large-soft:#e2f2ee; --g-lat-soft:#f6eed6;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --radius:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12162a; --surface:#1b2038; --sunk:#232a47; --line:#343d63;
+  --ink:#e8ebf7; --muted:#a3abc9; --accent:#7ea2ff;
+  --g-data:#7ea2ff; --g-small:#f19a6b; --g-med:#b9a0f2; --g-large:#6fd1bd; --g-lat:#e8c25a;
+  --g-data-soft:#1f2a4d; --g-small-soft:#3f2a20; --g-med-soft:#2f2650; --g-large-soft:#1d3a37; --g-lat-soft:#3b3219;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12162a; --surface:#1b2038; --sunk:#232a47; --line:#343d63;
+  --ink:#e8ebf7; --muted:#a3abc9; --accent:#7ea2ff;
+  --g-data:#7ea2ff; --g-small:#f19a6b; --g-med:#b9a0f2; --g-large:#6fd1bd; --g-lat:#e8c25a;
+  --g-data-soft:#1f2a4d; --g-small-soft:#3f2a20; --g-med-soft:#2f2650; --g-large-soft:#1d3a37; --g-lat-soft:#3b3219;
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;padding-inline:16px;padding-block:0 64px}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3,h4,h5{font-family:var(--display);text-wrap:balance;line-height:1.12;margin:0}
+p{margin:0}
+a{color:var(--accent);text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+.eyebrow{font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:700}
+
+header{padding-block:40px 24px;display:grid;gap:14px}
+header h1{font-size:clamp(2rem,5vw,3.3rem);font-weight:800;letter-spacing:-.02em}
+.lede{max-width:64ch;color:var(--muted);font-size:1.05rem}
+.ladder{display:flex;gap:3px;max-width:560px}
+.ladder span{flex:1;font-size:.7rem;font-weight:700;text-align:center;padding:5px 0 3px;border-radius:4px 4px 0 0;color:var(--muted);background:var(--sunk);border-bottom:3px solid var(--line);font-variant-numeric:tabular-nums}
+.ladder .i{border-bottom-color:var(--accent)} .ladder .a{border-bottom-color:var(--ink)}
+.howto{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:.92rem;color:var(--muted)}
+.howto b{color:var(--ink)}
+
+nav.chips{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;display:flex;gap:8px;overflow-x:auto;border-bottom:1px solid var(--line)}
+nav.chips a{flex:none;text-decoration:none;font-weight:700;font-size:.88rem;color:var(--ink);border:1.5px solid var(--c);background:var(--c-soft);padding:6px 14px;border-radius:99px}
+nav.chips a:hover{background:var(--surface)}
+
+.gdata{--c:var(--g-data);--c-soft:var(--g-data-soft)}
+.gsmall{--c:var(--g-small);--c-soft:var(--g-small-soft)}
+.gmed{--c:var(--g-med);--c-soft:var(--g-med-soft)}
+.glarge{--c:var(--g-large);--c-soft:var(--g-large-soft)}
+.glat{--c:var(--g-lat);--c-soft:var(--g-lat-soft)}
+
+section.group{padding-block:36px 8px;display:grid;gap:18px;scroll-margin-top:64px}
+.ghead{display:grid;gap:4px;border-bottom:3px solid var(--c);padding-bottom:12px}
+.ghead .tag{font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--c)}
+.ghead h2{font-size:clamp(1.6rem,3.4vw,2.2rem);font-weight:800}
+.ghead p{color:var(--muted);max-width:64ch}
+
+.acts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+.acts.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:980px){.acts.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:720px){.acts,.acts.three{grid-template-columns:1fr}}
+
+.act{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:var(--radius);padding:20px 22px;display:grid;gap:14px;min-width:0}
+.act.full{grid-column:1/-1}
+.act.plain{border-top-width:1px}
+.act h3{font-size:1.3rem;font-weight:800}
+.why{color:var(--muted)}
+.act h4{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--c);font-weight:700}
+.act ol,.act ul{margin:0;padding-left:1.25em;display:grid;gap:6px}
+.act ol li::marker{color:var(--c);font-weight:700}
+.block{display:grid;gap:8px}
+.leave{font-size:.92rem;background:var(--c-soft);padding:10px 14px;border-radius:8px}
+.leave b{color:var(--c)}
+.stems{display:grid;gap:6px}
+.stems span{display:block;font-style:italic;background:var(--sunk);padding:6px 10px;border-radius:6px;font-size:.9rem}
+
+.phases{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.phases{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.phases{grid-template-columns:1fr}}
+.phase{border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:8px;align-content:start;background:var(--bg);min-width:0}
+.phase .n{font-family:var(--display);font-weight:800;font-size:1.6rem;color:var(--c);line-height:1}
+.phase h5{font-size:1.05rem}
+.phase p{font-size:.9rem;color:var(--muted)}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);background:var(--sunk);font-weight:700}
+tr:last-child td,tr:last-child th{border-bottom:none}
+.template th{background:var(--c-soft)}
+.template td{color:var(--muted);font-style:italic}
+.sl{display:inline-block;font-size:.75rem;font-weight:700;color:var(--c);background:var(--c-soft);padding:1px 7px;border-radius:99px;font-style:normal;font-variant-numeric:tabular-nums;white-space:nowrap}
+ul.strats{list-style:none;padding:0!important;margin:0;display:grid;gap:4px}
+.credit{font-size:.72rem;letter-spacing:0;text-transform:none;font-weight:400;color:var(--muted);margin-left:6px}
+table.scrap th{width:36px;text-align:center;font-size:1.1rem;color:var(--c);background:var(--c-soft)}
+table.scrap td.ex{color:var(--muted);font-style:italic}
+table.texts th{width:32px;text-align:center;color:var(--c);background:var(--c-soft)}
+table.texts td:last-child{font-size:.82rem;color:var(--muted)}
+a.open{font-weight:700}
+table.rubric-ex td{font-size:.85rem}
+table.rubric-ex td:nth-child(2){background:var(--c-soft)}
+.rate{display:block;margin-top:6px;font-size:.75rem;font-weight:700;color:var(--c)}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:700}
+
+.cards{display:flex;flex-wrap:wrap;gap:8px}
+.cards span{border:1px dashed var(--c);border-radius:6px;padding:6px 10px;font-size:.88rem;background:var(--bg)}
+.bins{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media (max-width:520px){.bins{grid-template-columns:1fr}}
+.bins span{border:2px solid var(--c);border-radius:8px;padding:10px;font-weight:700;text-align:center;font-size:.85rem;color:var(--c)}
+
+.res{background:var(--c-soft);border-radius:var(--radius);padding:16px 20px;display:grid;gap:10px}
+.res h3{font-size:1rem;font-weight:800}
+.res ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px}
+@media (max-width:720px){.res ul{grid-template-columns:1fr}}
+.res li{display:grid;gap:1px;min-width:0}
+.res li a{font-weight:700;overflow-wrap:anywhere}
+.res li span{font-size:.85rem;color:var(--muted)}
+
+footer{margin-top:40px;font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:grid;gap:6px}
+footer p:first-child{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--ink)}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">All Cape Day 2026 · We Have the Data – Now What?</span>
+    <h1>Keep going: choose your next step</h1>
+    <p class="lede">Pick the group that matches the kind of change you want to work on. Each one has activities to run with your table and resources to take back to your program. Use your own data or ask for any samples.</p>
+    <div class="ladder" aria-label="Proficiency sublevels, Novice Low to Advanced">
+      <span>N1</span><span>N2</span><span>N3</span><span>N4</span><span class="i">I1</span><span class="i">I2</span><span class="i">I3</span><span class="i">I4</span><span class="i">I5</span><span class="a">A</span>
+    </div>
+    <div class="howto">
+      <span><b>1.</b> Choose a group</span>
+      <span><b>2.</b> Pick one activity and work through the prompts together</span>
+      <span><b>3.</b> Leave with one thing you'll do</span>
+    </div>
+  </header>
+
+  <nav class="chips" aria-label="Groups">
+    <a class="gdata" href="#data">Data analysis</a>
+    <a class="gsmall" href="#small">Small shift</a>
+    <a class="gmed" href="#medium">Medium shift</a>
+    <a class="glarge" href="#large">Large shift</a>
+    <a class="glat" href="#classical">Classical languages</a>
+  </nav>
+
+  <!-- ================= DATA ANALYSIS ================= -->
+  <section class="group gdata" id="data" aria-labelledby="h-data">
+    <div class="ghead">
+      <span class="tag">Look closer first</span>
+      <h2 id="h-data">Data analysis</h2>
+      <p>Slow down before deciding what to change. Keep what the data shows apart from what you think it means.</p>
+    </div>
+    <div class="acts">
+      <article class="act full">
+        <h3>Data Driven Dialogue</h3>
+        <p class="why">A four-phase protocol for looking at results as a group. Predictions, observations and explanations each get their own turn, so the talk stays curious instead of defensive.</p>
+        <div class="phases">
+          <div class="phase"><span class="n">1</span><h5>Predict</h5><p>Before you look, say what you expect to see. This brings out the assumptions everyone walks in with.</p>
+            <div class="stems"><span>I predict…</span><span>I assume…</span><span>I'm wondering if we'll see…</span></div></div>
+          <div class="phase"><span class="n">2</span><h5>Go visual</h5><p>Put the data where everyone can see it: chart paper, a sublevel bar graph, sticky notes by score.</p>
+            <div class="stems"><span>Where do students cluster?</span><span>How does the spread differ by mode?</span></div></div>
+          <div class="phase"><span class="n">3</span><h5>Observe</h5><p>Only what's on the page. No "because" yet. Facts, numbers, patterns.</p>
+            <div class="stems"><span>I observe that…</span><span>I notice a pattern in…</span><span>I'm surprised that…</span></div></div>
+          <div class="phase"><span class="n">4</span><h5>Infer</h5><p>Now explain. Hold more than one explanation and name what else you'd want to know.</p>
+            <div class="stems"><span>I believe the data suggests…</span><span>Other data that would help…</span><span>One thing we could try…</span></div></div>
+        </div>
+        <div class="leave"><b>You'll leave with:</b> a short list of inferences and one question your team still needs to answer.</div>
+      </article>
+
+      <article class="act">
+        <h3>Notice / Interpret / Shift</h3>
+        <p class="why">A shorter protocol. Works well for one class or one student.</p>
+        <ol>
+          <li><b>Notice.</b> Name three things you see in the data. If you catch yourself saying "because," save it for Interpret.</li>
+          <li><b>Interpret.</b> What might explain each one? Start with "I wonder if…"</li>
+          <li><b>Match.</b> Which of the seven common challenges does this look like?</li>
+          <li><b>Shift.</b> Name one change and decide if it's <a href="#small">small</a>, <a href="#medium">medium</a> or <a href="#large">large</a>. Then pick an activity from that section of the board to build it out.</li>
+        </ol>
+        <div class="leave"><b>You'll leave with:</b> one shift, sized and ready to build out.</div>
+      </article>
+
+      <article class="act">
+        <h3>Match it to a common challenge</h3>
+        <p class="why">Which one sounds like your students? Star the strategies you'd try first. Slide numbers point to the shared deck.</p>
+        <div class="tablewrap"><table>
+          <thead><tr><th>#</th><th>Challenge</th><th>Strategies and slides</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td>Targeting Intermediate Low, scoring Novice <span class="sl">slides 117–123</span></td><td><ul class="strats"><li>Push past lists to sentences and connected sentences <span class="sl">120–123</span></li></ul></td></tr>
+            <tr><td class="n">2</td><td>Targeting strong Intermediate, scoring low Intermediate <span class="sl">slides 125–135</span></td><td><ul class="strats"><li>Retrieval practice <span class="sl">129–132</span></li><li>Connecting word cards <span class="sl">133</span></li><li>Because / but / so <span class="sl">134–135</span></li></ul></td></tr>
+            <tr><td class="n">3</td><td>Targeting Intermediate High/Advanced, scoring Intermediate <span class="sl">slides 138–154</span></td><td><ul class="strats"><li>3-sentence story <span class="sl">143</span></li><li>Structured input <span class="sl">144–146</span></li><li>Recycling time frames <span class="sl">147–149</span></li><li>Discourse scramble <span class="sl">151–154</span></li></ul></td></tr>
+            <tr><td class="n">4</td><td>Heritage learners not reaching Advanced <span class="sl">slides 155–167</span></td><td><ul class="strats"><li>Because / but / so variations <span class="sl">161</span></li><li>Input flooding and enhancement <span class="sl">165</span></li><li>Error correction <span class="sl">166</span></li><li>Contrastive analysis <span class="sl">167</span></li></ul></td></tr>
+            <tr><td class="n">5</td><td>Answered but off topic or off task <span class="sl">slides 168–175</span></td><td><ul class="strats"><li>On-task vs. off-task examples <span class="sl">170</span></li><li>Function recycling <span class="sl">172–174</span></li><li>"Speaking of…" <span class="sl">175</span></li></ul></td></tr>
+            <tr><td class="n">6</td><td>Felt they said enough, scored lower <span class="sl">slides 176–180</span></td><td><ul class="strats"><li>Text-type ladder <span class="sl">178</span></li><li>Reflection color-coding <span class="sl">179</span></li><li>Quantity is not always best <span class="sl">180</span></li></ul></td></tr>
+            <tr><td class="n">7</td><td>Quality seems basic <span class="sl">slides 181–187</span></td><td><ul class="strats"><li>Strong vocabulary and synonyms <span class="sl">183–186</span></li><li>Beat the Bot <span class="sl">187</span></li></ul></td></tr>
+          </tbody>
+        </table></div>
+      </article>
+    </div>
+    <div class="res">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="https://drive.google.com/file/d/1a1Z6fu3KNcQpkG2yukBEe1ytt7hoN84p/view" target="_blank" rel="noopener">Data Driven Dialogue protocol</a><span>Full protocol with facilitator notes · PDF</span></li>
+        <li><a href="https://docs.google.com/document/d/1tpWPvcMDOsdDTm6T9WmShPSZpOtNdceGhwAfMwb_PL0/edit" target="_blank" rel="noopener">Processing and Breakout Tasks handout</a><span>Notice &amp; Interpret table, Common Challenges grid</span></li>
+        <li><a href="https://docs.google.com/presentation/d/19dVs4BjroHpFEYlQ6kdAoEFXkFk384cCm1do4PU4n_M/edit" target="_blank" rel="noopener">Today's slide deck</a><span>Sample data: slides 76–112 · Challenges: 115–187</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= SMALL SHIFT ================= -->
+  <section class="group gsmall" id="small" aria-labelledby="h-small">
+    <div class="ghead">
+      <span class="tag">Starting Monday</span>
+      <h2 id="h-small">Small shift: instruction</h2>
+      <p>Changes you can make in class next week, using the strategies from today.</p>
+    </div>
+    <div class="acts">
+      <article class="act">
+        <h3>Tiered Differentiation Plan</h3>
+        <p class="why">Turn one class's score distribution into three groups with different next steps.</p>
+        <ol>
+          <li>Sort students into three groups: below target, at target, above target.</li>
+          <li>For each group, name what they can do now and the next text type or function to push toward.</li>
+          <li>Choose one strategy per group: sentence frames, add-another-detail, connecting word cards, because / but / so, 3-sentence story or discourse scramble.</li>
+        </ol>
+        <div class="block">
+          <h4>Example</h4>
+          <div class="tablewrap"><table class="template">
+          <thead><tr><th>Group</th><th>Can do now</th><th>Next step</th><th>Strategy</th></tr></thead>
+          <tbody>
+            <tr><td>Below target</td><td>Lists, memorized phrases</td><td>Full sentences</td><td>Sentence frames</td></tr>
+            <tr><td>At target</td><td>Simple sentences</td><td>Strings with detail</td><td>Add-another-detail</td></tr>
+            <tr><td>Above target</td><td>Strings of sentences</td><td>Connected, two time frames</td><td>3-sentence story</td></tr>
+          </tbody>
+        </table></div>
+        </div>
+        <div class="leave"><b>You'll leave with:</b> a plan you can use in class next week.</div>
+      </article>
+
+      <article class="act">
+        <h3>Tier One Task</h3>
+        <p class="why">Same topic, same context, three versions. Each group is asked for one more step of text type than it produces now.</p>
+        <ol>
+          <li>Choose one speaking or writing task you'll give in the next two weeks.</li>
+          <li>Write a version for students below, at and above target.</li>
+          <li>For each version, decide the support and the text type you expect back.</li>
+          <li>Check that everyone can still share out on the same topic.</li>
+        </ol>
+        <div class="block">
+          <h4>Ways to tier</h4>
+          <ul>
+            <li><b>Support:</b> frames, word banks, connecting word cards, then none.</li>
+            <li><b>Text type:</b> sentences, strings, connected sentences, paragraphs.</li>
+            <li><b>Time frames:</b> present only, then present plus past or future.</li>
+            <li><b>Function:</b> describe, then compare, then explain or support an opinion.</li>
+          </ul>
+        </div>
+        <div class="leave"><b>You'll leave with:</b> one task written three ways.</div>
+      </article>
+
+    </div>
+    <div class="res">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="https://docs.google.com/presentation/d/1LXLttugVRIMVQy4x7XeyuqGunY_QB_mZbJPwsPN6fe0/edit" target="_blank" rel="noopener">¡A conversar! Jenga</a><span>Conversational Jenga prompts (Spanish example) · slides 220–221</span></li>
+        <li><a href="https://docs.google.com/document/d/1tpWPvcMDOsdDTm6T9WmShPSZpOtNdceGhwAfMwb_PL0/edit" target="_blank" rel="noopener">Processing and Breakout Tasks handout</a><span>Common Challenges grid with strategies</span></li>
+        <li><a href="https://docs.google.com/presentation/d/19dVs4BjroHpFEYlQ6kdAoEFXkFk384cCm1do4PU4n_M/edit" target="_blank" rel="noopener">Today's slide deck</a><span>Small shifts: slides 195–196 · Spontaneous output ideas: 207–221</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= MEDIUM SHIFT ================= -->
+  <section class="group gmed" id="medium" aria-labelledby="h-med">
+    <div class="ghead">
+      <span class="tag">This year</span>
+      <h2 id="h-med">Medium shift: assessment &amp; curriculum</h2>
+      <p>Change what you ask students to do, how you judge it, and where it shows up in your units.</p>
+    </div>
+    <div class="acts">
+      <article class="act">
+        <h3>Level Up a Unit Assessment</h3>
+        <p class="why">Rewrite one speaking or writing task so it gives evidence of your target level, then add a student self-check.</p>
+        <ol>
+          <li>Pick a task from a current unit and name the function it should require.</li>
+          <li>Rewrite it with the SCRAP framework, then add a level-up option.</li>
+          <li>Write a 3–4 item student checklist in plain language.</li>
+        </ol>
+        <div class="block">
+          <h4>SCRAP framework <span class="credit">Catherine Ritz</span></h4>
+          <div class="tablewrap"><table class="scrap">
+            <tbody>
+              <tr><th>S</th><td><b>Situation.</b> What is happening?</td><td class="ex">A student from another country may study at your school next year.</td></tr>
+              <tr><th>C</th><td><b>Challenge.</b> What problem needs solving?</td><td class="ex">They are choosing between your school and one other.</td></tr>
+              <tr><th>R</th><td><b>Role.</b> Who is the student?</td><td class="ex">A current student at your school.</td></tr>
+              <tr><th>A</th><td><b>Audience.</b> Who is it for?</td><td class="ex">The exchange student.</td></tr>
+              <tr><th>P</th><td><b>Product / performance.</b> What will students create or do?</td><td class="ex">An email that describes your school, explains why it's a good place to study and asks about their school.</td></tr>
+            </tbody>
+          </table></div>
+          <p class="why"><b>Level-up option:</b> compare your school to the one they attend now. Compare "Describe your school with many details" (slide 198) with this version (slide 199).</p>
+        </div>
+        <div class="block">
+          <h4>Checklist examples</h4>
+          <ul>
+            <li>I answered the question that was asked.</li>
+            <li>I connected my sentences.</li>
+            <li>I used past tense when telling a story.</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h4>Ask yourself</h4>
+          <ul>
+            <li>Can a student finish it with a list? Then it can only show Novice.</li>
+            <li>Does it ask for more than one time frame? That's the I4+ signal.</li>
+          </ul>
+        </div>
+        <div class="leave"><b>You'll leave with:</b> a revised task and a student self-check.</div>
+      </article>
+
+      <article class="act">
+        <h3>Think-Like-a-Rater Rubric</h3>
+        <p class="why">Raters judge one prompt at one level. Build a rubric for one of your tasks that judges the same way.</p>
+        <ol>
+          <li>Name the task and the one major level it targets.</li>
+          <li>Use the rater's columns: Meets Fully, Meets Minimally, Some Evidence, No Evidence.</li>
+          <li>Use what the tests measure as your rows.</li>
+          <li>Describe each cell in words you could read aloud to students.</li>
+        </ol>
+        <div class="block">
+          <h4>Rows to start with</h4>
+          <ul>
+            <li>Functions and text type</li>
+            <li>Comprehensibility</li>
+            <li>Language control</li>
+            <li>Vocabulary and quality</li>
+            <li>On task</li>
+          </ul>
+        </div>
+        <div class="leave"><b>You'll leave with:</b> a rubric for your next speaking or writing task.</div>
+      </article>
+
+      <article class="act">
+        <h3>Unit Function Inventory</h3>
+        <p class="why">If a function never shows up in a unit, students won't show it on the test.</p>
+        <ol>
+          <li>List the units in one course, in order.</li>
+          <li>For each unit, name the functions students actually practice and the text type they produce.</li>
+          <li>Compare to the course target. Circle functions that are missing or appear only once.</li>
+          <li>Pick one unit to revise first.</li>
+        </ol>
+        <div class="block">
+          <h4>Functions by level</h4>
+          <ul>
+            <li><b>Novice:</b> name, list, identify, answer simple questions.</li>
+            <li><b>Intermediate:</b> ask and answer, describe, handle a transaction, begin to narrate.</li>
+            <li><b>Advanced:</b> narrate in major time frames, explain, compare, handle a complication.</li>
+          </ul>
+        </div>
+        <div class="leave"><b>You'll leave with:</b> a course map with gaps marked.</div>
+      </article>
+
+      <article class="act">
+        <h3>Review Your Rubrics</h3>
+        <p class="why">Bring a rubric you already use and check it against what the proficiency tests look for. Then fix one thing.</p>
+        <ol>
+          <li><b>Criteria.</b> Does it cover comprehensibility, vocabulary, text type, language control and, for interpersonal tasks, quality of communication? What's missing? What's extra?</li>
+          <li><b>One target.</b> Is it written to one target level, or does it try to describe every level at once?</li>
+          <li><b>Student language.</b> Could a student read each row and know what to do? Try turning each criterion into a question: "How well am I understood?"</li>
+          <li><b>Balance.</b> Does grammar or length outweigh text type? Would a long list score higher than a few connected sentences?</li>
+          <li><b>Next steps.</b> Does the rubric tell students how to grow, or only how they scored?</li>
+        </ol>
+        <div class="block">
+          <h4>Example: Spanish 4H interpersonal rubric</h4>
+          <p class="why">A single-point rubric. The middle column states the Intermediate High target. The two sides hold ready-made feedback students check off.</p>
+          <div class="tablewrap"><table class="rubric-ex">
+            <thead><tr><th>For next time Δ</th><th>Intermediate High criteria</th><th>Keep it up +</th></tr></thead>
+            <tbody>
+              <tr><td>☐ You responded in single sentences. Work to make them longer, more connected thoughts.<br>☐ Look for more advanced connecting words.</td><td><b>Text type.</b> How do I structure my message? I use connected sentences to describe and explain. I can begin to tell a paragraph-length story.<br><span class="rate">Does Not Meet Yet · Approaches · Meets · Exceeds</span></td><td>☐ You used longer, connected sentences to add detail.<br>☐ You used a variety of connecting and transition words.</td></tr>
+            </tbody>
+          </table></div>
+          <p class="why">Rows: comprehensibility, vocabulary use, text type, language control, quality of communication.</p>
+        </div>
+        <div class="leave"><b>You'll leave with:</b> one change to a rubric you already use.</div>
+      </article>
+    </div>
+    <div class="res">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="https://docs.google.com/document/d/1CcNPbp2509IgvjK-vZ_TbqnQVhRxK7QejK3ICLgKl0Q/edit" target="_blank" rel="noopener">Spanish 4H Interpersonal Speaking Rubric</a><span>Single-point rubric example with built-in feedback</span></li>
+        <li><a href="https://docs.google.com/presentation/d/19dVs4BjroHpFEYlQ6kdAoEFXkFk384cCm1do4PU4n_M/edit" target="_blank" rel="noopener">Today's slide deck</a><span>Rater monologue: 51–53, 60–62 · Rewriting prompts: 198–202 · Function inventory: 224–228</span></li>
+        <li><a href="https://www.doe.mass.edu/frameworks/world-languages/2021.pdf" target="_blank" rel="noopener">2021 MA World Languages Framework</a><span>DESE · topic progression by level, p. 10</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= LARGE SHIFT ================= -->
+  <section class="group glarge" id="large" aria-labelledby="h-large">
+    <div class="ghead">
+      <span class="tag">Across the program</span>
+      <h2 id="h-large">Large shift: program</h2>
+      <p>Line up expectations and conversations across your department.</p>
+    </div>
+    <div class="acts">
+      <article class="act">
+        <h3>Proficiency Expectations Cheat Sheet</h3>
+        <p class="why">A one-page reference so every teacher and student knows what each level should sound like.</p>
+        <ol>
+          <li>List each course level and its proficiency target from Breakout #1.</li>
+          <li>For each level, fill in the expected text type, key functions, comprehensibility and language control.</li>
+          <li>Add one student-friendly "I can" statement per level.</li>
+        </ol>
+        <div class="tablewrap"><table class="template">
+          <thead><tr><th>Level</th><th>Target</th><th>Text type</th><th>Key functions</th><th>"I can"</th></tr></thead>
+          <tbody>
+            <tr><td>Level 1</td><td>N3</td><td>Words, lists, phrases</td><td>Name, list</td><td>I can name foods I like.</td></tr>
+            <tr><td>Level 3</td><td>I2</td><td>Strings of sentences</td><td>Describe, ask</td><td>I can describe my routine.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="leave"><b>You'll leave with:</b> a draft cheat sheet to share with your department.</div>
+      </article>
+
+      <article class="act">
+        <h3>Plan a Department Data Talk</h3>
+        <p class="why">A low-stakes 30–45 minute meeting where your department looks at proficiency results together.</p>
+        <ol>
+          <li>Choose the data and how you'll show it: charts, a gallery walk, one class or the whole program.</li>
+          <li>Pick a protocol: Data Driven Dialogue, Notice / Interpret / Shift, or a gallery walk (observations, then questions, then takeaways).</li>
+          <li>Write two or three questions to ask.</li>
+          <li>Decide on one shared focus to try before the next testing window.</li>
+        </ol>
+        <div class="block">
+          <h4>Sample 40-minute agenda</h4>
+          <div class="tablewrap"><table>
+            <tbody>
+              <tr><td class="n">5 min</td><td>Welcome and norms: curiosity over judgment</td></tr>
+              <tr><td class="n">5 min</td><td>Predict</td></tr>
+              <tr><td class="n">10 min</td><td>Silent look at the charts, then observations</td></tr>
+              <tr><td class="n">10 min</td><td>Inferences in small groups</td></tr>
+              <tr><td class="n">10 min</td><td>Agree on one shared focus</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <p class="why">Show program-level data before any one teacher's class.</p>
+        <div class="leave"><b>You'll leave with:</b> a meeting agenda.</div>
+      </article>
+
+      <article class="act full">
+        <h3>Who else needs to hear it?</h3>
+        <p class="why">Large shifts need people outside your classroom. Plan the conversation, not just the change.</p>
+        <ol>
+          <li>List who needs to know: department, administrators, school committee, families, students.</li>
+          <li>For each one, pick the single chart or number that tells the story best.</li>
+          <li>Write the ask in one sentence: time, schedule, testing, or the Seal of Biliteracy at more levels.</li>
+          <li>Decide who you'll talk to first, and when.</li>
+        </ol>
+      </article>
+    </div>
+    <div class="res">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="https://drive.google.com/file/d/1a1Z6fu3KNcQpkG2yukBEe1ytt7hoN84p/view" target="_blank" rel="noopener">Data Driven Dialogue protocol</a><span>Run your department talk with it · Data talk slides: 230–233 · PDF</span></li>
+        <li><a href="https://docs.google.com/presentation/d/19dVs4BjroHpFEYlQ6kdAoEFXkFk384cCm1do4PU4n_M/edit" target="_blank" rel="noopener">Today's slide deck</a><span>Possible targets: 10–11 · Ritz chart: 19 · Large shifts: 222–236</span></li>
+        <li><a href="https://docs.google.com/document/d/1tpWPvcMDOsdDTm6T9WmShPSZpOtNdceGhwAfMwb_PL0/edit" target="_blank" rel="noopener">Processing and Breakout Tasks handout</a><span>Breakout #1 targets table</span></li>
+        <li><a href="https://www.doe.mass.edu/frameworks/world-languages/2021.pdf" target="_blank" rel="noopener">2021 MA World Languages Framework</a><span>DESE · Intermediate High as the Seal goal, p. 11</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= CLASSICAL ================= -->
+  <section class="group glat" id="classical" aria-labelledby="h-lat">
+    <div class="ghead">
+      <span class="tag">Latin &amp; ALIRA</span>
+      <h2 id="h-lat">Classical languages</h2>
+      <p>ALIRA tests interpretive reading only, so these run entirely on reading. Each one matches a breakout from today.</p>
+    </div>
+    <div class="acts three">
+      <article class="act">
+        <h3>Level It, Then Ask It</h3>
+        <p class="why">Sort real texts onto the ALIRA scale, then write the kind of question ALIRA asks.</p>
+        <div class="block">
+          <h4>Part 1: Level the texts</h4>
+          <ol>
+            <li>Read each text in the set below (A–G) for gist. Don't translate.</li>
+            <li>Place each at Novice, Intermediate or Advanced.</li>
+            <li>Say what makes it that level: length, sentence structure, familiar topic, support from pictures or context.</li>
+          </ol>
+        </div>
+        <div class="block">
+          <h4>The text set</h4>
+          <div class="tablewrap"><table class="texts">
+            <tbody>
+              <tr><th>A</th><td>Four picture cards, each with a one-line Latin caption ("Puella in horto ambulat.")</td><td>Teacher-made; images from <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a></td></tr>
+              <tr><th>B</th><td>A list of six classroom or household rules in Latin</td><td>Teacher-made</td></tr>
+              <tr><th>C</th><td>A short dialogue from Plautus, <i>Menaechmi</i></td><td><a href="https://catalog.perseus.org/catalog/urn:cts:latinLit:phi0119.phi010.opp-lat3" target="_blank" rel="noopener">Perseus Catalog</a></td></tr>
+              <tr><th>D</th><td>A Pompeii wall inscription, CIL 4.5296 (a few lines)</td><td><a href="https://en.wikipedia.org/wiki/CIL_4.5296" target="_blank" rel="noopener">Wikipedia</a></td></tr>
+              <tr><th>E</th><td>One Martial epigram (4–6 lines)</td><td><a href="https://www.thelatinlibrary.com/martial.html" target="_blank" rel="noopener">The Latin Library</a></td></tr>
+              <tr><th>F</th><td>Pliny the Younger, <i>Letters</i> 6.16 (Vesuvius), one paragraph</td><td><a href="https://www.thelatinlibrary.com/pliny.ep6.html" target="_blank" rel="noopener">The Latin Library</a></td></tr>
+              <tr><th>G</th><td>A modern Latin news story</td><td><a href="https://ephemeris.alcuinus.net/" target="_blank" rel="noopener">Ephemeris</a></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <div class="block">
+          <h4>Part 2: Ask it like ALIRA</h4>
+          <ol>
+            <li>Choose one text, or a passage you already teach.</li>
+            <li>Write two four-option questions in English: one main idea, one supporting detail.</li>
+            <li>For each wrong answer, note why someone would pick it.</li>
+          </ol>
+        </div>
+        <div class="block">
+          <h4>Part 3: Swap and test</h4>
+          <ul>
+            <li>Can it be answered without translating the whole passage?</li>
+            <li>Can it be answered by spotting one or two words? Then it tests vocabulary.</li>
+            <li>Would each wrong answer tempt someone who half understood?</li>
+            <li>Does the question match the text's level?</li>
+          </ul>
+        </div>
+        <div class="leave"><b>You'll leave with:</b> one leveled text and two ALIRA-style questions.</div>
+      </article>
+
+      <article class="act">
+        <h3>Translation or Comprehension?</h3>
+        <p class="why">ALIRA asks students to get at meaning without translating, so a program built only on translation can produce strong students with low scores.</p>
+        <div class="block">
+          <h4>Sort these with a partner</h4>
+          <div class="cards">
+            <span>Translate a passage into English</span><span>Answer English questions about a Latin story</span><span>Match a picture to a sentence</span><span>Parse every verb</span><span>Summarize a passage in three bullets</span><span>Choose the best title</span><span>Read a modern Latin news story</span><span>Scan a passage</span>
+          </div>
+        </div>
+        <div class="bins"><span>ALIRA rewards this</span><span>ALIRA doesn't test this</span><span>Builds toward it indirectly</span></div>
+        <div class="block">
+          <h4>Then discuss</h4>
+          <ul>
+            <li>Add two tasks from your own course. Where do they land?</li>
+            <li>DESE expects classical students to grow faster in reading than in speaking. Do your targets show that, or copy the modern-language ones?</li>
+            <li>Which one task would you swap first?</li>
+          </ul>
+        </div>
+        <div class="leave"><b>You'll leave with:</b> one translation task to swap for comprehension.</div>
+      </article>
+
+      <article class="act">
+        <h3>Read Sally's I-2 Report</h3>
+        <p class="why">ACTFL's sample ALIRA report is the Latin case next to Bobby and Clara.</p>
+        <p><a class="open" href="https://www.actfl.org/uploads/files/general/Documents/assessments/Sample-of-ALIRA-Score-Report.pdf" target="_blank" rel="noopener">Open Sally's sample ALIRA score report (ACTFL, PDF)</a></p>
+        <ol>
+          <li><b>Rater lens.</b> I-2, I-3 and I-4 are all Intermediate Mid. What would Sally need to read consistently to reach I-4? I-5?</li>
+          <li><b>Family lens.</b> Rewrite the I-2 descriptor in two plain sentences a parent would understand. Add one thing to do at home.</li>
+          <li><b>Student lens.</b> Use the coaching stem "You showed really strong evidence of ___" with the report's strategies: cognates, titles and pictures, prior knowledge, rereading.</li>
+        </ol>
+        <div class="block">
+          <h4>Latin common challenges</h4>
+          <ul>
+            <li><b>Strong grammar, low score:</b> knowing forms isn't reading on sight. See Challenge #2.</li>
+            <li><b>Stalled at I-1/I-2:</b> mostly textbook stories, rarely authentic or modern texts. See #3.</li>
+            <li><b>"Ran out of time":</b> translated in their heads instead of reading for gist. See #6.</li>
+          </ul>
+        </div>
+        <div class="leave"><b>You'll leave with:</b> next steps, a parent note and a coaching script.</div>
+      </article>
+
+      <article class="act plain full">
+        <h3>Latin shifts to start from</h3>
+        <div class="tablewrap"><table>
+          <tbody>
+            <tr><th style="width:110px">Small</th><td>Swap one translation assignment for comprehension questions. Open class with a short sight passage read for gist. Use embedded (tiered) readings of the same story.</td></tr>
+            <tr><th>Medium</th><td>Add one ALIRA-style interpretive task to every unit assessment. Bring modern Latin texts and dialogues into each level. Use some spoken Latin input to build reading.</td></tr>
+            <tr><th>Large</th><td>Set reading targets by level with the NYSED classical indicators. Give ALIRA as a pre/post test and define what growth means locally. Bring Latin into the Seal of Biliteracy conversation.</td></tr>
+          </tbody>
+        </table></div>
+      </article>
+    </div>
+    <div class="res">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="https://drive.google.com/file/d/1qoQFFjznNj0RWgjc6N4vLq2Fl57ryvB9/view" target="_blank" rel="noopener">NYSED Proficiency Ranges for Classical Languages</a><span>Reading indicators by level · 11×17 PDF</span></li>
+        <li><a href="https://www.actfl.org/uploads/files/general/Documents/assessments/Sample-of-ALIRA-Score-Report.pdf" target="_blank" rel="noopener">Sample ALIRA score report</a><span>ACTFL · the Sally I-2 case</span></li>
+        <li><a href="https://www.actfl.org/assessments/k-12-assessments/alira" target="_blank" rel="noopener">ALIRA overview</a><span>ACTFL · text types and score scale</span></li>
+        <li><a href="https://camws.org/sites/default/files/26211%20What%20is%20the%20ACTFL.pdf" target="_blank" rel="noopener">CAMWS ALIRA workshop</a><span>Model for the leveling and item-writing activity</span></li>
+        <li><a href="https://www.doe.mass.edu/frameworks/world-languages/2021.pdf" target="_blank" rel="noopener">2021 MA World Languages Framework</a><span>DESE · Classical Languages, p. 25</span></li>
+        <li><a href="https://ephemeris.alcuinus.net/" target="_blank" rel="noopener">Ephemeris</a><span>Modern Latin news stories</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>Data does not define you. It informs you.</p>
+    <p>All Cape Day 2026 · We Have the Data – Now What? Turning Proficiency Results into Meaningful Change</p>
+  </footer>
+</div>
+
+</body>
+</html>
